@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Binar Multimedia — Intro</title>
+
+  <!-- Font opsional (butuh internet). Jika offline, otomatis memakai font cadangan. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500&family=Michroma&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="intro.css">
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0"   stop-color="#f0f9ff"/>
+        <stop offset=".45" stop-color="#4cc3ff"/>
+        <stop offset="1"   stop-color="#1d5bff"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <main id="intro" class="intro" aria-label="Intro Binar Multimedia">
+
+    <div class="bg"></div>
+    <div class="bloom" aria-hidden="true"></div>
+    <div class="horizon" aria-hidden="true"></div>
+
+    <canvas id="fx" aria-hidden="true"></canvas>
+
+    <div class="stage">
+      <div class="lockup">
+
+        <!-- Logo: titik → kotak → huruf B -->
+        <div class="mark" aria-hidden="true">
+          <div class="vortex c"></div>
+          <div class="dot c"></div>
+          <div class="pulse c"></div>
+
+          <div class="swayer">
+            <div class="tile">
+              <svg class="b" viewBox="-3 0 120 120">
+                <path class="b-line" pathLength="1" d="M26 10H56C74 10 82 21 82 34C82 46 75 54 64 57C79 60 88 70 88 84C88 100 76 110 58 110H26Z M26 58H64"/>
+                <path class="b-core" pathLength="1" d="M26 10H56C74 10 82 21 82 34C82 46 75 54 64 57C79 60 88 70 88 84C88 100 76 110 58 110H26Z M26 58H64"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="orbit o1 c"><div class="spin"><i class="ring"></i><i class="orb"></i></div></div>
+          <div class="orbit o2 c"><div class="spin"><i class="ring"></i><i class="orb"></i></div></div>
+          <div class="flare c"></div>
+        </div>
+
+        <!-- Teks: meluncur keluar di samping logo -->
+        <div class="reveal">
+          <div class="clip">
+            <div class="content">
+              <h1 class="title" aria-label="Binar Multimedia">
+                <span class="word">BINAR</span>
+                <span class="word acc">MULTIMEDIA</span>
+              </h1>
+              <div class="rule" aria-hidden="true"></div>
+              <p class="sub">AUDIOVISUAL EQUIPMENT RENTAL</p>
+              <p class="tag">Solusi Multimedia untuk Setiap Acara</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sweep" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="flashfx" aria-hidden="true"></div>
+
+    <button id="skip" class="btn skip" type="button">Skip Intro</button>
+  </main>
+
+  <button id="replay" class="btn replay" type="button">Putar ulang intro</button>
+
+  <script src="intro.js"></script>
+</body>
+</html>

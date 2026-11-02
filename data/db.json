@@ -1,0 +1,111 @@
+{
+  "equipment": [
+    {
+      "id": 1,
+      "name": "Proyektor 5000 Lumens",
+      "category": "Proyektor",
+      "pricePerDay": 250000,
+      "stock": 4,
+      "description": "Full HD, HDMI/VGA, cocok untuk seminar & rapat besar."
+    },
+    {
+      "id": 2,
+      "name": "Layar Proyektor 3x2 m",
+      "category": "Proyektor",
+      "pricePerDay": 100000,
+      "stock": 4,
+      "description": "Layar tripod/fastfold, mudah dipasang."
+    },
+    {
+      "id": 3,
+      "name": "Sound System 2000 Watt",
+      "category": "Audio",
+      "pricePerDay": 600000,
+      "stock": 3,
+      "description": "Speaker aktif + mixer 8 channel, untuk indoor 150–300 orang."
+    },
+    {
+      "id": 4,
+      "name": "Mic Wireless (2 unit)",
+      "category": "Audio",
+      "pricePerDay": 120000,
+      "stock": 6,
+      "description": "Handheld wireless UHF, jangkauan stabil."
+    },
+    {
+      "id": 5,
+      "name": "Kamera Mirrorless 4K",
+      "category": "Kamera",
+      "pricePerDay": 450000,
+      "stock": 3,
+      "description": "Lensa kit, baterai cadangan, memori 128 GB."
+    },
+    {
+      "id": 6,
+      "name": "Tripod Video Fluid Head",
+      "category": "Kamera",
+      "pricePerDay": 75000,
+      "stock": 5,
+      "description": "Kokoh untuk live streaming dan dokumentasi."
+    },
+    {
+      "id": 7,
+      "name": "Lighting Par LED Set (4 unit)",
+      "category": "Lighting",
+      "pricePerDay": 300000,
+      "stock": 5,
+      "description": "RGBW, DMX, cocok untuk panggung & dekorasi."
+    },
+    {
+      "id": 8,
+      "name": "LED TV 55 inci + Stand",
+      "category": "Display",
+      "pricePerDay": 350000,
+      "stock": 4,
+      "description": "Smart TV 4K dengan standing mobile."
+    },
+    {
+      "id": 9,
+      "name": "Laptop Presentasi",
+      "category": "Display",
+      "pricePerDay": 200000,
+      "stock": 4,
+      "description": "Siap pakai, terpasang aplikasi presentasi & pemutar media."
+    },
+    {
+      "id": 10,
+      "name": "Video Switcher + Streaming Kit",
+      "category": "Streaming",
+      "pricePerDay": 700000,
+      "stock": 2,
+      "description": "ATEM-style switcher, capture card, siap live YouTube/Zoom."
+    }
+  ],
+  "bookings": [
+    {
+      "id": "BM-0001",
+      "createdAt": "2026-11-01T13:03:23.460Z",
+      "status": "pending",
+      "name": "nawfal rakhmansah",
+      "phone": "085147033372",
+      "location": "jalan jalan",
+      "notes": "kenaikan presiden",
+      "startDate": "2028-12-10",
+      "endDate": "2028-12-13",
+      "days": 4,
+      "items": [
+        {
+          "id": 7,
+          "name": "Lighting Par LED Set (4 unit)",
+          "qty": 5,
+          "pricePerDay": 300000
+        }
+      ],
+      "total": 6000000
+    }
+  ],
+  "seq": {
+    "equipment": 10,
+    "booking": 1
+  }
+}

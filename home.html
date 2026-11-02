@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#02040f">
+  <meta name="description" content="Binar Multimedia — sewa peralatan audiovisual: proyektor, sound system, kamera, lighting, dan streaming untuk setiap acara.">
+  <title>Binar Multimedia — Sewa Peralatan Audiovisual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Michroma&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Binar Multimedia">
+      <span class="logo"><svg viewBox="-3 0 120 120" aria-hidden="true"><path d="M26 10H56C74 10 82 21 82 34C82 46 75 54 64 57C79 60 88 70 88 84C88 100 76 110 58 110H26Z M26 58H64"/></svg></span>
+      <span class="brand-name">BINAR <b>MULTIMEDIA</b></span>
+    </a>
+    <nav class="nav" aria-label="Menu utama">
+      <a href="#katalog">Katalog</a>
+      <a href="#cara">Cara Sewa</a>
+      <a href="#booking">Booking</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <a class="cart-pill" href="#booking" id="cartPill" aria-label="Keranjang sewa">Sewa <span id="cartCount">0</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <p class="eyebrow">AUDIOVISUAL EQUIPMENT RENTAL</p>
+      <h1>Solusi Multimedia<br>untuk <span>Setiap Acara</span></h1>
+      <p class="lead">Proyektor, sound system, kamera, lighting, hingga perangkat live streaming. Pilih alat, tentukan tanggal, kami siapkan hari-H Anda.</p>
+      <div class="cta">
+        <a class="btn-primary" href="#katalog">Lihat Katalog</a>
+        <a class="btn-ghost" href="#booking">Booking Sekarang</a>
+      </div>
+      <ul class="trust">
+        <li>Peralatan terawat &amp; teruji</li>
+        <li>Cek stok sesuai tanggal</li>
+        <li>Konfirmasi via WhatsApp</li>
+      </ul>
+    </section>
+
+    <section id="katalog" class="sec">
+      <p class="eyebrow">KATALOG</p>
+      <h2>Pilih Peralatan Anda</h2>
+      <div class="chips" id="chips" role="tablist" aria-label="Kategori"></div>
+      <div class="grid" id="grid" aria-live="polite"><p class="muted">Memuat katalog…</p></div>
+    </section>
+
+    <section id="cara" class="sec">
+      <p class="eyebrow">CARA SEWA</p>
+      <h2>Tiga Langkah Mudah</h2>
+      <ol class="steps">
+        <li><span>01</span><h3>Pilih alat</h3><p>Tambahkan peralatan yang dibutuhkan ke daftar sewa.</p></li>
+        <li><span>02</span><h3>Isi booking</h3><p>Tentukan tanggal &amp; lokasi acara. Stok dicek otomatis.</p></li>
+        <li><span>03</span><h3>Konfirmasi</h3><p>Tim kami menghubungi lewat WhatsApp untuk kesepakatan akhir.</p></li>
+      </ol>
+    </section>
+
+    <section id="booking" class="sec">
+      <p class="eyebrow">BOOKING</p>
+      <h2>Ajukan Sewa</h2>
+      <div class="book">
+        <form id="bookForm" class="panel" novalidate>
+          <div class="row2">
+            <label>Tanggal mulai<input type="date" name="startDate" required></label>
+            <label>Tanggal selesai<input type="date" name="endDate" required></label>
+          </div>
+          <label>Nama lengkap<input type="text" name="name" maxlength="80" autocomplete="name" required></label>
+          <label>Nomor WhatsApp<input type="tel" name="phone" maxlength="20" placeholder="08xxxxxxxxxx" autocomplete="tel" required></label>
+          <label>Lokasi acara<input type="text" name="location" maxlength="160" placeholder="Nama gedung / alamat"></label>
+          <label>Catatan<textarea name="notes" rows="3" maxlength="400" placeholder="Jenis acara, jumlah tamu, kebutuhan khusus…"></textarea></label>
+          <p class="msg" id="formMsg" role="alert" hidden></p>
+          <button class="btn-primary" id="submitBtn" type="submit">Kirim Booking</button>
+        </form>
+
+        <aside class="panel">
+          <h3>Daftar Sewa</h3>
+          <div id="cartList"><p class="muted">Belum ada peralatan. Tambahkan dari katalog.</p></div>
+          <dl class="sum">
+            <div><dt>Per hari</dt><dd id="sumDay">Rp 0</dd></div>
+            <div><dt>Durasi</dt><dd id="sumDays">—</dd></div>
+            <div class="total"><dt>Estimasi total</dt><dd id="sumTotal">Rp 0</dd></div>
+          </dl>
+          <p class="muted small">Estimasi belum termasuk ongkos kirim &amp; teknisi. Harga akhir dikonfirmasi oleh tim kami.</p>
+        </aside>
+      </div>
+
+      <div class="panel done" id="done" hidden>
+        <h3>Booking terkirim ✓</h3>
+        <p>Kode booking Anda <b id="doneId"></b>. Estimasi total <b id="doneTotal"></b>.</p>
+        <a class="btn-primary" id="doneWa" target="_blank" rel="noopener">Konfirmasi via WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="kontak" class="foot">
+    <div>
+      <div class="brand-name">BINAR <b>MULTIMEDIA</b></div>
+      <p class="muted">Audiovisual Equipment Rental — Solusi Multimedia untuk Setiap Acara.</p>
+    </div>
+   <a
+  class="btn-ghost"
+  id="waLink"
+  href="https://wa.me/6285146033372"
+  target="_blank"
+  rel="noopener noreferrer"
+>Chat WhatsApp</a>
+    <p class="muted small">© <span id="yr"></span> Binar Multimedia · <a href="admin.html">Admin</a> · <a href="index.html?intro">Putar intro</a></p>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
