@@ -12,16 +12,16 @@ const DB_FILE = path.join(__dirname, 'data', 'db.json');
 
 /* ---------- Data ---------- */
 const SEED = [
-  ['Proyektor 5000 Lumens', 'Proyektor', 250000, 4, 'Full HD, HDMI/VGA, cocok untuk seminar & rapat besar.'],
-  ['Layar Proyektor 3x2 m', 'Proyektor', 100000, 4, 'Layar tripod/fastfold, mudah dipasang.'],
-  ['Sound System 2000 Watt', 'Audio', 600000, 3, 'Speaker aktif + mixer 8 channel, untuk indoor 150–300 orang.'],
-  ['Mic Wireless (2 unit)', 'Audio', 120000, 6, 'Handheld wireless UHF, jangkauan stabil.'],
-  ['Kamera Mirrorless 4K', 'Kamera', 450000, 3, 'Lensa kit, baterai cadangan, memori 128 GB.'],
-  ['Tripod Video Fluid Head', 'Kamera', 75000, 5, 'Kokoh untuk live streaming dan dokumentasi.'],
-  ['Lighting Par LED Set (4 unit)', 'Lighting', 300000, 5, 'RGBW, DMX, cocok untuk panggung & dekorasi.'],
-  ['LED TV 55 inci + Stand', 'Display', 350000, 4, 'Smart TV 4K dengan standing mobile.'],
-  ['Laptop Presentasi', 'Display', 200000, 4, 'Siap pakai, terpasang aplikasi presentasi & pemutar media.'],
-  ['Video Switcher + Streaming Kit', 'Streaming', 700000, 2, 'ATEM-style switcher, capture card, siap live YouTube/Zoom.']
+  ['Proyektor 5000 Lumens', 'Proyektor', 4, 'Full HD, HDMI/VGA, cocok untuk seminar & rapat besar.'],
+  ['Layar Proyektor 3x2 m', 'Proyektor', 4, 'Layar tripod/fastfold, mudah dipasang.'],
+  ['Sound System 2000 Watt', 'Audio', 3, 'Speaker aktif + mixer 8 channel, untuk indoor 150–300 orang.'],
+  ['Mic Wireless (2 unit)', 'Audio',  6, 'Handheld wireless UHF, jangkauan stabil.'],
+  ['Kamera Mirrorless 4K', 'Kamera', 3, 'Lensa kit, baterai cadangan, memori 128 GB.'],
+  ['Tripod Video Fluid Head', 'Kamera', 5, 'Kokoh untuk live streaming dan dokumentasi.'],
+  ['Lighting Par LED Set (4 unit)', 'Lighting', 5, 'RGBW, DMX, cocok untuk panggung & dekorasi.'],
+  ['LED TV 55 inci + Stand', 'Display', 4, 'Smart TV 4K dengan standing mobile.'],
+  ['Laptop Presentasi', 'Display', 4, 'Siap pakai, terpasang aplikasi presentasi & pemutar media.'],
+  ['Video Switcher + Streaming Kit', 'Streaming', 2, 'ATEM-style switcher, capture card, siap live YouTube/Zoom.']
 ];
 
 function freshDb() {
