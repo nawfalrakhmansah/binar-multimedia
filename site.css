@@ -158,3 +158,169 @@ td input { margin: 0; padding: 8px 10px; font-size: 13px; }
 }
 @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } .brand-name { font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+/* =================================
+   GAMBAR PRODUK
+================================= */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  padding: 210px 0 0;
+  cursor: zoom-in;
+  isolation: isolate;
+}
+
+/* Gambar produk di bagian atas kartu */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 190px;
+
+  background-image: var(--card-image);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+
+  z-index: -1;
+}
+
+/* Gradasi gambar */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+
+  background: linear-gradient(
+    transparent,
+    rgba(12, 26, 66, .9)
+  );
+
+  z-index: -1;
+}
+
+/* Sembunyikan ikon lama */
+.card .ico {
+  display: none;
+}
+
+/* Isi kartu */
+.card h3,
+.card p,
+.card .meta {
+  margin-left: 17px;
+  margin-right: 17px;
+}
+
+.card .meta {
+  padding-bottom: 17px;
+}
+
+/* =================================
+   LIGHTBOX
+================================= */
+
+.image-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  background: rgba(0, 0, 0, .94);
+  backdrop-filter: blur(10px);
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px;
+}
+
+.image-modal.show {
+  display: flex;
+}
+
+/* Gambar besar */
+.image-modal img {
+  max-width: 85%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: white;
+}
+
+/* Tombol tutup */
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+
+  background: none;
+  border: none;
+
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+/* Tombol navigasi */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .15);
+  color: white;
+
+  font-size: 23px;
+  cursor: pointer;
+}
+
+#prevImage {
+  left: 25px;
+}
+
+#nextImage {
+  right: 25px;
+}
+
+/* Nomor gambar */
+.image-counter {
+  position: absolute;
+  bottom: 25px;
+
+  color: white;
+  font-size: 14px;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+  .image-modal {
+    padding: 20px;
+  }
+
+  .image-modal img {
+    max-width: 90%;
+    max-height: 70vh;
+  }
+
+  #prevImage {
+    left: 8px;
+  }
+
+  #nextImage {
+    right: 8px;
+  }
+}
