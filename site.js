@@ -5,7 +5,25 @@
   const $ = (s) => document.querySelector(s);
   const rp = (n) => 'Rp ' + Math.round(n).toLocaleString('id-ID');
   const ICONS = { Proyektor: '📽️', Audio: '🔊', Kamera: '🎥', Lighting: '💡', Display: '🖥️', Streaming: '📡' };
+const PRODUCT_IMAGES = {
+  'Proyektor 5000 Lumens': 'assets/proyektor.jpg',
+  'Layar Proyektor 3x2 m': 'assets/layar.jpg',
+  'Sound System 2000 Watt': 'assets/sound.jpg',
+  'Mic Wireless (2 unit)': 'assets/mic.jpg',
+  'Kamera Mirrorless 4K': 'assets/kamera.jpg',
+  'Tripod Video Fluid Head': 'assets/tripod.jpg',
+  'Lighting Par LED Set (4 unit)': 'assets/lighting.jpg',
+  'LED TV 55 inci + Stand': 'assets/tv.jpg',
+  'Laptop Presentasi': 'assets/laptop.jpg',
+  'Video Switcher + Streaming Kit': 'assets/video-switcher.jpg'
+};
 
+const PRODUCT_GALLERY = {
+  'LED TV 55 inci + Stand': [
+    'assets/tv.jpg',
+    'assets/tv-2.jpg'
+  ]
+};
   /** Buat elemen dengan teks aman (tanpa innerHTML) */
   function el(tag, attrs = {}, ...kids) {
     const n = document.createElement(tag);
@@ -52,32 +70,99 @@
       onclick: () => { category = c; renderChips(); renderGrid(); }
     }, c)));
   }
+function renderGrid() {
+  const list = equipment.filter(
+    (e) => category === 'Semua' || e.category === category
+  );
 
-  function renderGrid() {
-    const list = equipment.filter((e) => category === 'Semua' || e.category === category);
-    const grid = $('#grid');
-    if (!list.length) { grid.replaceChildren(el('p', { class: 'muted' }, 'Belum ada peralatan.')); return; }
-    grid.replaceChildren(...list.map((e) => {
-      const max = maxFor(e);
-      const q = cart.get(e.id) || 0;
-      const stock = el('span', { class: 'stock' + (max <= 1 ? ' low' : '') },
-        max <= 0 ? 'Habis di tanggal ini' : (avail ? `Tersedia ${max} unit` : `Stok ${e.stock} unit`));
-      const ctl = q
-        ? el('div', { class: 'qty' },
-            el('button', { type: 'button', 'aria-label': 'Kurangi', onclick: () => setQty(e.id, q - 1) }, '−'),
-            el('output', {}, String(q)),
-            el('button', { type: 'button', 'aria-label': 'Tambah', onclick: () => setQty(e.id, q + 1) }, '+'))
-        : el('button', { class: 'btn-sm', type: 'button', onclick: () => setQty(e.id, 1), ...(max <= 0 ? { disabled: '' } : {}) }, 'Tambah');
-      return el('article', { class: 'card' },
-        el('div', { class: 'ico', 'aria-hidden': 'true' }, ICONS[e.category] || '🎛️'),
-        el('h3', {}, e.name),
-        el('p', {}, e.description),
-        el('div', { class: 'meta' },
-          el('div', {}, el('div', { class: 'price' }, rp(e.pricePerDay), el('small', {}, ' /hari')), stock),
-          ctl));
-    }));
+  const grid = $('#grid');
+
+  if (!list.length) {
+    grid.replaceChildren(
+      el('p', { class: 'muted' }, 'Belum ada peralatan.')
+    );
+    return;
   }
 
+  grid.replaceChildren(...list.map((e) => {
+    const max = maxFor(e);
+    const q = cart.get(e.id) || 0;
+
+    const stock = el(
+      'span',
+      { class: 'stock' + (max <= 1 ? ' low' : '') },
+      max <= 0
+        ? 'Habis di tanggal ini'
+        : (avail ? `Tersedia ${max} unit` : `Stok ${e.stock} unit`)
+    );
+
+    const ctl = q
+      ? el('div', { class: 'qty' },
+          el('button', {
+            type: 'button',
+            'aria-label': 'Kurangi',
+            onclick: () => setQty(e.id, q - 1)
+          }, '−'),
+
+          el('output', {}, String(q)),
+
+          el('button', {
+            type: 'button',
+            'aria-label': 'Tambah',
+            onclick: () => setQty(e.id, q + 1)
+          }, '+')
+        )
+      : el('button', {
+          class: 'btn-sm',
+          type: 'button',
+          onclick: () => setQty(e.id, 1),
+          ...(max <= 0 ? { disabled: '' } : {})
+        }, 'Tambah');
+
+    // Mengambil gambar produk
+    const image = PRODUCT_IMAGES[e.name] || '';
+
+    // Mengambil galeri jika produk memiliki lebih dari satu gambar
+    const images = PRODUCT_GALLERY[e.name] || (image ? [image] : []);
+
+    const card = el('article', {
+      class: 'card',
+      style: image ? `--card-image: url("${image}")` : ''
+    },
+
+      el('div', {
+        class: 'ico',
+        'aria-hidden': 'true'
+      }, ICONS[e.category] || '🎛️'),
+
+      el('h3', {}, e.name),
+
+      el('p', {}, e.description),
+
+      el('div', { class: 'meta' },
+        el('div', {},
+          el('div', { class: 'price' },
+            rp(e.pricePerDay),
+            el('small', {}, ' /hari')
+          ),
+          stock
+        ),
+        ctl
+      )
+    );
+
+    // Klik kartu untuk membuka gambar
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('button')) return;
+
+      if (images.length) {
+        openGallery(images);
+      }
+    });
+
+    return card;
+  }));
+}
   function setQty(id, q) {
     const e = equipment.find((x) => x.id === id);
     q = Math.max(0, Math.min(q, maxFor(e)));
@@ -168,7 +253,109 @@
     equipment = await api('/api/equipment');
     renderChips(); renderGrid();
   }
+/* ---------- LIGHTBOX GALERI PRODUK ---------- */
 
+const modal = $('#imageModal');
+const modalImage = $('#modalImage');
+const prevImage = $('#prevImage');
+const nextImage = $('#nextImage');
+const closeModal = $('#closeModal');
+const imageCounter = $('#imageCounter');
+
+let currentGallery = [];
+let currentIndex = 0;
+
+// Menampilkan gambar sesuai indeks
+function showGalleryImage() {
+  if (!modalImage || !imageCounter || !prevImage || !nextImage) {
+    return;
+  }
+
+  modalImage.src = currentGallery[currentIndex];
+
+  imageCounter.textContent =
+    `${currentIndex + 1} / ${currentGallery.length}`;
+
+  prevImage.hidden = currentGallery.length <= 1;
+  nextImage.hidden = currentGallery.length <= 1;
+}
+
+// Membuka galeri
+function openGallery(images) {
+  if (!modal || !images.length) return;
+
+  currentGallery = images;
+  currentIndex = 0;
+
+  showGalleryImage();
+
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+// Menutup galeri
+function closeGallery() {
+  if (!modal) return;
+
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+
+  if (modalImage) {
+    modalImage.src = '';
+  }
+}
+
+// Tombol gambar sebelumnya
+if (prevImage) {
+  prevImage.addEventListener('click', () => {
+    currentIndex =
+      (currentIndex - 1 + currentGallery.length) %
+      currentGallery.length;
+
+    showGalleryImage();
+  });
+}
+
+// Tombol gambar berikutnya
+if (nextImage) {
+  nextImage.addEventListener('click', () => {
+    currentIndex =
+      (currentIndex + 1) % currentGallery.length;
+
+    showGalleryImage();
+  });
+}
+
+// Tombol tutup
+if (closeModal) {
+  closeModal.addEventListener('click', closeGallery);
+}
+
+// Klik area gelap untuk menutup
+if (modal) {
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeGallery();
+    }
+  });
+}
+
+// Navigasi menggunakan keyboard
+document.addEventListener('keydown', (event) => {
+  if (!modal || !modal.classList.contains('show')) return;
+
+  if (event.key === 'Escape') {
+    closeGallery();
+  }
+
+  if (event.key === 'ArrowLeft' && prevImage) {
+    prevImage.click();
+  }
+
+  if (event.key === 'ArrowRight' && nextImage) {
+    nextImage.click();
+  }
+});
   api('/api/config').then((c) => { wa = c.wa; $('#waLink').href = `https://wa.me/${wa}`; }).catch(() => {});
   loadEquipment().then(renderCart).catch(() => {
     $('#grid').replaceChildren(el('p', { class: 'muted' }, 'Katalog gagal dimuat. Pastikan server berjalan (npm start).'));
